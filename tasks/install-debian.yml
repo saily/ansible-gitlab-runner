@@ -5,6 +5,13 @@
   become: true
   when: gitlab_runner_skip_package_repo_install is not defined or not gitlab_runner_skip_package_repo_install
 
+- name: "(Debian) Install curl"
+  ansible.builtin.apt:
+    name: curl
+    state: present
+  become: true
+  when: gitlab_runner_skip_package_repo_install is not defined or not gitlab_runner_skip_package_repo_install
+
 - name: "(Debian) Get Gitlab repository installation script"
   ansible.builtin.get_url:
     url: https://packages.gitlab.com/install/repositories/runner/{{ gitlab_runner_package_name }}/script.deb.sh
